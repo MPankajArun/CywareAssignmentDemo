@@ -10,7 +10,10 @@ def index(request):
 
 
 def profile(request):
-    req = requests.get('https://api.github.com/users/mpankajarun')
+    if request.method == 'POST':
+        username = request.POST.get('user')
+        req = requests.get('https://api.github.com/users/' + username)
+    #req = requests.get('https://api.github.com/users/mpankajarun')
     #content = req.text
     jsonList = []
     jsonList.append(json.loads(req.content))
